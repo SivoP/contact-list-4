@@ -3,4 +3,8 @@ html {
   color: white;
 };
 
+ul {
+  list-style: none;
+}
+
 

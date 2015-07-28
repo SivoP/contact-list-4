@@ -1,9 +1,14 @@
 <h1>Home Page</h1>
 
-
+ <ul>
 <% @contacts.each do |contact| %>
-<div><%="Name: #{contact.firstname} #{contact.lastname}  "%></div>
-<% end %>
+    <li>
+      <%="Name: #{contact.firstname} #{contact.lastname}"%>
+      <%="Phone: #{contact.phone}"%>
+      <%="E-mail: #{contact.email}"%>
+    </li>
+ <% end %>
+ </ul>
 
 
 <!-- <div>
