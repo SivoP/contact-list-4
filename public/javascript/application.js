@@ -3,41 +3,47 @@ $(document).ready(function() {
   var allContacts = $('#all-contacts');
   var form = $("#new-form");
   var contactCard = $(".contact-card")
+  var contactProfile = $("#contact-profile")
+  showContacts();
 
-  console.log(contactCard)
+
   // event listener to show contents of a single card on click
   $(document).on('click', ".contact-card",function(e) {
+
     e.stopPropagation
     e.preventDefault
-    console.log(this)
-
     var id = $(this).data('contact-id')
-
     $.getJSON("/contacts/" + id, function (data) {
-      console.log(data);
+      console.log(contactProfile)
+      var contact = data
+      var cardHtml =  "<div id='shown-profile' data-contact-id="+ contact.id + "> Name: " + contact.firstname + '<br>' + contact.lastname + "</div>";
+      contactProfile.html(cardHtml)
+      contactProfile.addClass('selected')
     })
   });
   
-  function grabContactHtml(contact) {
-        return "<div class='contact-card' data-contact-id="+ contact.id + ">" + contact.firstname + "</div>";
+// method for showing all contents 
+  var grabContactHtml = function (contact) {
+      return "<div class='contact-card' data-contact-id="+ contact.id + ">" + contact.firstname + ' ' + contact.lastname + "<br>" + contact.phone + "<br>" + contact.email + "</div>";
       }
 
-  var showContacts =  function() {
-    $.getJSON('/contacts', function(contacts) {
-      var html = '';
-    
-      contacts.forEach(function (contact) {
-        var contactView = grabContactHtml(contact)
-        html += contactView
-      });
-      allContacts.html(html)
+  function showContacts() {
+      $.getJSON('/contacts', function(contacts) {
+        var htmlContents = '';
+      
+        contacts.forEach(function (contact) {
+          var contactView = grabContactHtml(contact)
+          htmlContents += contactView
+        });
+        allContacts.html(htmlContents)
     });
   };
+    
 
-  showContacts();
+  
   // listener to update contact list upon form submission 
   form.on('submit', function(e) {
-    e.stopPropagation();
+    
     e.preventDefault();
     var firstname = $("#form-firstname").val();
     var lastname = $("#form-lastname").val();  
@@ -50,7 +56,7 @@ $(document).ready(function() {
       'phone'    : phone,
       'email'    : email
     }
-    
+
     $.ajax({
       type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
       url         : '/contacts', // the url where we want to POST
@@ -60,4 +66,22 @@ $(document).ready(function() {
       success     : showContacts
     });   
   });
+
+  $('#delete-contact').on('click', function() {
+    var id = $('#shown-profile').data('contact-id');
+    
+    $.ajax({
+      type      : 'DELETE',
+      url       : '/contacts/'+id,
+      dataType  : 'json',
+      encode    : true,
+      success   : $(".contact-card[data-contact-id="+id+"]").remove(),
+    })
+
+    // .done(function(data)
+    // {
+    //   console.log(data, this);
+    //   $(".contact-card[data-contact-id="+id+"]").remove()
+    // })
+  });  
 });

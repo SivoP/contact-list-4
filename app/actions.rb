@@ -23,6 +23,12 @@ get '/contacts' do
 
 end
 
+delete '/contacts/:id' do 
+  @contact = Contact.find(params[:id])
+  @contact.destroy
+end
+
+
 
 
 post '/contacts' do
@@ -34,7 +40,6 @@ post '/contacts' do
     email: params[:email],
     cell: params[:cell]
     )
-  
   @contact.save!
   @contact.to_json
 end

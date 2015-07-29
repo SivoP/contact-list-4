@@ -14,13 +14,28 @@ html {
 }
 .contact-card {
   background-color: #536DFE;
-  height: 50px;
-  width: 140px;
+  height: 140px;
+  width: 280px;
   text-align: center;
   vertical-align: middle;
   line-height: 50px;
   margin-bottom: 5px;
 };
+
+.selected {
+  background-color:#7C4DFF;
+  opacity: 80%;
+  height: 140px;
+  width: 280px;
+}
+
+#contact-profile {
+  background-color:#7C4DFF ;
+  opacity: 80%;
+
+};
+
+
 
 div p {
   font-weight: 
