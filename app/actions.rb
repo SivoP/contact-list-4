@@ -19,7 +19,7 @@ end
 
 get '/contacts' do 
   @contacts = Contact.all
-  @contacs.to_json
+  @contacts.to_json
 
 end
 
@@ -34,6 +34,7 @@ post '/contacts' do
     email: params[:email],
     cell: params[:cell]
     )
+  
   @contact.save!
   @contact.to_json
 end

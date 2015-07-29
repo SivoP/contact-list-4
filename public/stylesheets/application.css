@@ -9,6 +9,9 @@ ul {
 
 #new-form {
   color: black;
+  display: hidden;
 };
 
-
+.list-contacts {
+  
+}
