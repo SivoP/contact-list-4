@@ -3,14 +3,14 @@
 
 get '/' do
   @contacts = Contact.all
-  @contacs.to_json
+  @contacts.to_json
   erb :index
 end
 
-post '/' do 
-
+get '/contacts/:id' do
+  @contact = Contact.find(params[:id])
+  @contact.to_json
 end
-
 
 get '/new' do
   @contact = Contact.find(2)

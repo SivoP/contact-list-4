@@ -12,6 +12,12 @@ ul {
   display: hidden;
 };
 
-.list-contacts {
-  
-}
+.contact-card {
+  background-color: #536DFE;
+  height: 50px;
+  width: 140px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  margin-bottom: 5px;
+};
